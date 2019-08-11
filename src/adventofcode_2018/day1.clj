@@ -10,14 +10,14 @@
 
 ;; Part 2
 (defn occured-twice [md]
-  (letfn [(ot [mdi, sumsi, last-sum]
+  (letfn [(ot [mdi, sums, last-sum]
             (if (empty? mdi)
-              (ot md sumsi last-sum)
+              (ot md sums last-sum)
               (let [sum (+ (first mdi) last-sum)]
-                (if (contains? sumsi sum)
+                (if (contains? sums sum)
                   sum
-                  (recur (rest mdi) (assoc sumsi sum 1) sum)))))]
-    (ot md {0 1} 0)))
+                  (recur (rest mdi) (conj sums sum) sum)))))]
+    (ot md #{0} 0)))
 
 (and
  (= (occured-twice [1, -1]) 0)
